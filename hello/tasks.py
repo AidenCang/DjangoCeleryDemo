@@ -5,8 +5,14 @@ from celery import shared_task
 import time
 
 
-@shared_task
-def add(x, y):
+@shared_task(bind=True)
+def add(self, x, y):
+    time.sleep(1)
+    self.update_state(state="PROGRESS", meta={'progress': 50})
+    time.sleep(1)
+    self.update_state(state="PROGRESS", meta={'progress': 90})
+    time.sleep(1)
+    return 'hello world: %i' % (a + b)
     return x + y
 
 

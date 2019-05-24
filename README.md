@@ -116,9 +116,15 @@ Django Extensions:
         'blog.apps.BlogConfig',
         ....
     ]
+6.在setting中导入配置文件
 
+    # Celery配置文件
+    from .celeryconfig import *
 
-
+7.运行celery
+    
+    celery -B -A Djangoexample worker -l info
+    
 # 进程管理工具
 
     pip install supervisor
