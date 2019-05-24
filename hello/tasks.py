@@ -27,7 +27,8 @@ def send_import_summary():
 
 
 # or
-@shared_task
-def send_notifiction():
+@shared_task(bind=True)
+def send_notifiction(self):
     print('Here I\’m')
+
     # Another trick

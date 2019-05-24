@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'hello.apps.HelloConfig',
+    'feeds.apps.FeelsConfig',
+    'blog.apps.BlogConfig',
     # 'django-crontab'
 ]
 
@@ -122,47 +124,6 @@ STATIC_URL = '/static/'
 
 # Celery定时任务设置
 CELERY_RESULT_BACKEND = 'django-db'
-from celery.schedules import crontab
-
-# CELERY_BROKER_URL = 'redis://localhost:6379'
-# Let's make things happen
-
-
-# CELERYBEAT_SCHEDULE = {
-#     'task1': {
-#         'task': 'hello.tasks.send_notification',
-#         'schedule': timedelta(seconds=10),
-#         'args': ()
-#     }
-# }
-# CELERYBEAT_SCHEDULE = {
-#     'send-summary-every-hour': {
-#         'task': 'summary',
-#         # There are 4 ways we can handle time, read further
-#         'schedule': 3600.0,
-#         # If you're using any arguments
-#         'args': ('We don’t need any',),
-#     },
-#     # Executes every Friday at 4pm
-#     'send-notification-on-friday-afternoon': {
-#         'task': 'hello.tasks.send_notification',
-#         'schedule': crontab(hour=19, minute=2),
-#     },
-#     'task1': {
-#         'task': 'hello.tasks.send_notification',
-#         'schedule': crontab(hour=7, minute=2),
-#     },
-# }
-#
-# # django-contrb定时任务
-# CRONJOBS = (
-#     # ('*/1 * * * *', '你的app名.定时函数所在的py文件名.定时函数名'),
-#     ('*/1 * * * *', 'hello.tasks.send_notifiction'),
-#     # ('0   0 1 * *', '你的app名.定时函数所在的py文件名.定时函数名', '> 输出文件路径和名称'),
-# )
-#
-# CELERY_TIMEZONE = 'UTC'
-#
 
 # 防止死锁
 CELERYD_FORCE_EXECV = True
