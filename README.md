@@ -105,6 +105,17 @@ Django Extensions:
 
     pip install -r requirements.txt
 
+5.配置相关的app
+
+    INSTALLED_APPS = [
+        .....
+        'django_celery_results',
+        'django_celery_beat',
+        'hello.apps.HelloConfig',
+        'feeds.apps.FeelsConfig',
+        'blog.apps.BlogConfig',
+        ....
+    ]
 
 
 
@@ -114,9 +125,6 @@ Django Extensions:
     从定向配置文件
     echo_supervisord_conf > conf/supervisord.conf
 
-# Django定时任务
-# 防止死锁
-CELERYD_FORCE_EXECV = True
 
 # 将错误的任务路由到专用队列：
 task_routes = {
@@ -134,5 +142,3 @@ celery -A tasks control rate_limit tasks.add 10/m
 
 # 远程控制命令以及如何监视工作人员正在执行的操作的详细信息
 
-#要验证配置文件是否正常工作且不包含任何语法错误
-python -m celeryconfig
