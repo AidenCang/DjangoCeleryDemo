@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'feeds.apps.FeelsConfig',
     'blog.apps.BlogConfig',
     'django_apscheduler',
-
-    # 'django-crontab'
+    'django_crontab',
+    'cron.apps.CronConfig'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +128,6 @@ from .celeryconfig import *
 
 # APScheduler时间格式配置
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
+
+# django-crontab
+from cron.cron import CRONJOBS

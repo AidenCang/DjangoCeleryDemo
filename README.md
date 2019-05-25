@@ -148,3 +148,8 @@ celery -A tasks control rate_limit tasks.add 10/m
 
 # 远程控制命令以及如何监视工作人员正在执行的操作的详细信息
 
+
+# APScheduler使用教程
+[Advanced Python Scheduler](https://apscheduler.readthedocs.io/en/latest/index.html)
+
+[django-apscheduler](https://github.com/jarekwg/django-apscheduler)
