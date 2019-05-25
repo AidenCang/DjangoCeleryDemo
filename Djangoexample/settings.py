@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ecfc!s7=q^x*nu++$j6xwy@8x+0in$r90jzrshm_c0nln5$^bl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'hello.apps.HelloConfig',
     'feeds.apps.FeelsConfig',
     'blog.apps.BlogConfig',
+    'django_apscheduler',
+
     # 'django-crontab'
 ]
 
@@ -123,3 +125,6 @@ STATIC_URL = '/static/'
 
 # Celery配置文件
 from .celeryconfig import *
+
+# APScheduler时间格式配置
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
