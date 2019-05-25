@@ -1,7 +1,11 @@
+# -*- coding: UTF-8 -*-
 from time import time
 
 from celery import task, bootsteps
+from celery.signals import after_task_publish, before_task_publish
 import celery
+from celery.signals import celeryd_init
+
 from .celeryconfig import ROUTE_KEY_IMAGE, ROUTE_KEY_VIDEO
 from celery.utils.log import get_task_logger
 from celery.worker.request import Request
@@ -41,7 +45,7 @@ class GlobalRequest(Request):
 
 
 class GlobTask(celery.Task):
-    request = GlobalRequest
+    # request = GlobalRequest
     # 重试时间
     default_retry_delay = 30 * 60
     # 最大重试次数
@@ -65,6 +69,17 @@ class GlobTask(celery.Task):
 
     def run(self, *args, **kwargs):
         pass
+
+
+# 使用信号机制对全局的事件进行监听
+
+def globals_after_task_publish():
+    pass
+
+
+@celeryd_init.connect(sender='worker12@example.com')
+def configure_worker12(conf=None, **kwargs):
+    conf.task_default_rate_limit = '10/m'
 
 
 # class NaiveAuthenticateServer(celery.task):
@@ -116,6 +131,7 @@ class DeadlockDetection(bootsteps.StartStopStep):
             if req.time_start and time() - req.time_start > self.timeout:
                 raise SystemExit()
 
+
 @task(base=DatabaseTask)
 def process_rows():
     for row in process_rows.db.table.all():
@@ -123,7 +139,7 @@ def process_rows():
         pass
 
 
-@task(base=GlobTask, bind=True)
+@task(base=GlobTask, bind=True, callable=None)
 def every_30_seconds(self):
     logger.info(self.request)
     print('Request: {0!r}'.format(self.request))

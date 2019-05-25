@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # Celery定时任务设置
 CELERY_RESULT_BACKEND = 'django-db'
 
